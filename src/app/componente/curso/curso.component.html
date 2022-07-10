@@ -1,0 +1,218 @@
+<div class="container" *ngIf="visibilidadeTabela">
+  <br>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="ExibirFormularioCadastro()">
+    Adicionar Curso
+  </button>
+
+  <br><br>
+
+  <div class="container">
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Modal
+  <form >
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+          <div class="modal-dialog">
+            <div class="modal-content bg-dark text-light">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Curso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="mb-3">
+                    <label class="form-label">Descrição do Curso</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <label class="form-label">Data de Início</label>
+                    <input type="date" class="form-control" placeholder="--/--/--">
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Data de Término</label>
+                    <input type="date" class="form-control" placeholder="--/--/--">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-8">
+                    <label class="form-label">Categoria</label>
+                    <input type="email" class="form-control" placeholder="Categoria">
+                  </div>
+                  <div class="col-4">
+                    <label class="form-label">Qtd. Alunos</label>
+                    <input type="number" class="form-control" placeholder="Ex.:">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+                <button type="button" class="btn btn-primary">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </form> -->
+
+  <table class="table table-striped table-hover table-sm " *ngIf="cursos">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Data de Início</th>
+        <th scope="col">Data de Término</th>
+        <th scope="col">Quantidade de Alunos</th>
+        <th scope="col">Ativo</th>
+        <th scope="col">Categoria</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let curso of cursos; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ curso.descricao }}</td>
+        <td>{{ curso.dtInicial | date }}</td>
+        <td>{{ curso.dtFinal | date }}</td>
+        <td>{{ curso.qtdAlunos }}</td>
+        <td>{{ curso.status }}</td>
+        <td>{{ curso.categoriaId }}</td>
+        <td>
+          <button type="button" class="bt btn-sm" (click)="ExibirFormularioAtualizacao(curso.cursoId)">Atualizar</button> |
+          <button type="button" class="bt btn-sm" (click)="ExcluirCurso(curso.cursoId)">Finalizar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- <div class="row" *ngIf="visibilidadeFormulario">
+  <div class="col-6 border border-light rounded p-5 shadow" 
+    *ngIf="formulario">
+    <h3>{{tituloFormulario}}</h3>
+    <hr>
+    <form [formGroup] = "formulario" (ngSubmit)="EnviarFormulario()">
+      <div class="form-group">
+        <div class="row">
+          <div class="mb-3">
+            <label class="form-label">Descrição do Curso</label>
+            <input type="text" class="form-control form-control-sm" rows="3" formControlName="descricao">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-6">
+            <label class="form-label">Data de Início</label>
+            <input type="date" class="form-control form-control-sm" formControlName="dtInicial" placeholder="--/--/--">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Data de Término</label>
+            <input type="date" class="form-control" formControlName="dtFinal" placeholder="--/--/--">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">Categoria</label>
+            <input type="number" class="form-control form-control-sm" formControlName="categoriaId" placeholder="Categoria">
+            <select asp-for="Categoria" class ="form-control" asp-items="cursos.categoriaId"></select>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Qtd. Alunos</label>
+            <input type="number" class="form-control form-control-sm" formControlName="qtdAlunos" placeholder="Ex.:">
+          </div>
+          <br><br>
+          <div class="form-group form-check">
+            <label class="form-check-label">
+              Ativo
+              Ativo <input type="ckeckbox" class="form-check-input" asp-for="IsPago" /> 
+              <select class="form-control form-control-sm" formControlName="status">
+                <option class="form-control form-control-sm" formControlName="status" value="true">true</option>
+                <option class="form-control form-control-sm" formControlName="status" value="false">false</option>
+                </select>
+            </label>
+          </div>
+          </div>
+      </div>
+
+      <div class="container">
+          <div class="row">
+              <div>
+                  <button type="subimt" class="btn btn-primary">Salvar</button>
+                  <button type="button" class="btn btn-danger" (click)="voltar()">Voltar</button>
+              </div>
+          </div>
+      </div>
+    </form>
+  </div>      
+</div> -->
+
+<div class="container" *ngIf="visibilidadeFormulario">
+  <br>
+
+  <div class="row">
+    <div class="col-12 border border-light rounded p-5 shadow" 
+      *ngIf="formulario">
+      <h3>{{tituloFormulario}}</h3>
+      <hr>
+      <form [formGroup] = "formulario" (ngSubmit) = "EnviarFormulario()">
+        <div class="form-group">
+          <div class="row">
+            <div class="mb-3">
+              <label class="form-label">Descrição do Curso</label>
+              <input type="text" class="form-control form-control-sm" rows="3" formControlName="descricao">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-6">
+              <label class="form-label">Data de Início</label>
+              <input type="text" class="form-control form-control-sm" formControlName="dtInicial" placeholder="--/--/--">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Data de Término</label>
+              <input type="text" class="form-control" formControlName="dtFinal" placeholder="--/--/--">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <label class="form-label">Categoria</label>
+              <input type="number" class="form-control form-control-sm" formControlName="categoriaId" placeholder="Categoria">
+              <!-- <select asp-for="Categoria" class ="form-control" asp-items="cursos.categoriaId"></select> -->
+            </div>
+            <div class="col-6">
+              <label class="form-label">Qtd. Alunos</label>
+              <input type="number" class="form-control form-control-sm" formControlName="qtdAlunos" placeholder="Ex.:">
+            </div>
+            <br><br>
+            <!-- <div class="form-group">
+              <label class="form-label">
+                Ativo
+                Ativo <input type="ckeckbox" class="form-check-input" asp-for="IsPago" />
+                <select class="form-control form-control-sm" formControlName="status">
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+              </label>
+            </div> -->
+          </div>
+        </div>
+
+        <br>
+  
+        <div class="container">
+            <div class="row">
+                <div>
+                    <button type="subimt" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-danger" (click)="voltar()">Voltar</button>
+                </div>
+            </div>
+        </div>
+      </form>
+    </div>      
+  </div>
+
+</div>
+
