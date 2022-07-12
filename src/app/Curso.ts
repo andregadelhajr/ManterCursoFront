@@ -1,3 +1,5 @@
+import { Categoria } from "./Categoria";
+
 export class Curso {
     cursoId: number;
     descricao: string;
@@ -6,4 +8,5 @@ export class Curso {
     qtdAlunos: number;
     status: boolean;
     categoriaId: number;
+    categoria: Categoria;
 }

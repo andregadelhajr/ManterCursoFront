@@ -23,6 +23,11 @@ export class CursoService {
       return this.http.get<Curso[]>(this.url);
     }
 
+    PegarTodosCursosAtivos():  Observable<Curso[]>{
+      const apiUrl = `${this.url}/ativos`;
+      return this.http.get<Curso[]>(apiUrl, httpOptions);
+    }
+
     //segundo metodo
     PegarPeloId(cursoId: number): Observable<Curso>{
       const apiUrl  = `${this.url}/${cursoId}`;
@@ -36,13 +41,14 @@ export class CursoService {
 
     //quarto metodo
     AtualizarCurso(curso: Curso): Observable<any> {
-      return this.http.put<Curso>(this.url, curso, httpOptions);
+      const apiUrl  = `${this.url}/${curso.cursoId}`;
+      return this.http.put<Curso>(apiUrl, curso, httpOptions);
     }
 
     //excluir
     ExcluirCurso(cursoId: number):Observable<any>{
       const apiUrl = `${this.url}/${cursoId}`;
-      return this.http.delete<number>(apiUrl,httpOptions);
+      return this.http.delete<Curso>(apiUrl, httpOptions);
   }
 
 }

@@ -25,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     NgbModule,
     HttpClientModule,
+    FormsModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(
@@ -34,8 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
         preventDuplicates: true,
         progressBar: true
       }
-    ),
-    FormsModule  
+    ), 
   ],
   providers: [HttpClientModule, CursoService],
   bootstrap: [AppComponent]
