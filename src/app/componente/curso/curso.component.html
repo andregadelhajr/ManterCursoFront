@@ -17,8 +17,8 @@
     <div class="container">
       <form [formGroup]="buscaForm">
         <div class="input-group input-daterange col-md-6">
-          <input formControlName="dataInicialFiltro" type="date" class="form-control" [(ngModel)]="dataInicialFiltro"/>
-          <input type="date" class="form-control" [(ngModel)]="dataFinalFiltro" formControlName="dataFinalFiltro"/>
+          <input formControlName="dtInicialFiltro" type="date" class="form-control" [(ngModel)]="dtInicialFiltro"/>
+          <input type="date" class="form-control" [(ngModel)]="dtFinalFiltro" formControlName="dtFinalFiltro"/>
 
           <button class="btn btn-outline-primary" (click)="filtroData()"> Filtrar por Data </button>
           <button class="btn btn-outline-warning" (click)="LimparFiltro()"> Limpar Busca </button>

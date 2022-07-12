@@ -32,8 +32,8 @@ export class CursoComponent implements OnInit {
   cursosFiltrados: Curso[];
   cursoId : number;
   excluirId: number;
-  dataInicialFiltro: any;
-  dataFinalFiltro: any;
+  dtInicialFiltro: any;
+  dtFinalFiltro: any;
   dataAtual: any = new Date();
 
   visibilidadeTabela: boolean = true;
@@ -53,8 +53,8 @@ export class CursoComponent implements OnInit {
     });
 
     this.buscaForm = this.fb.group({
-      dataInicialFiltro : [],
-      dataFinalFiltro : [],
+      dtInicialFiltro : [],
+      dtFinalFiltro : [],
       busca: []
     })
   }
@@ -219,39 +219,47 @@ export class CursoComponent implements OnInit {
 
   filtroData(){
 
-    if(this.dataInicialFiltro > this.dataFinalFiltro && this.dataFinalFiltro ){
+    if(this.dtInicialFiltro > this.dtFinalFiltro && this.dtFinalFiltro )
+    {
       this.toastr.error('Data final não pode ser menor que a data inicial');
-    } else if(!this.dataInicialFiltro && !this.dataFinalFiltro){
+
+    } else if(this.dtInicialFiltro && !this.dtFinalFiltro)
+    {
       this.ListarCursos();
     }   
-    else if (this.dataInicialFiltro && !this.dataFinalFiltro){
-      this.filtrarCursoDataInicial(this.dataInicialFiltro);
-    }else if (!this.dataInicialFiltro && this.dataFinalFiltro){
-      this.filtrarCursoDataFinal(this.dataFinalFiltro);
-    }else {
-      this.filtrarCursoDataInicialFinal(this.dataInicialFiltro, this.dataFinalFiltro)
+    else if (this.dtInicialFiltro && !this.dtFinalFiltro)
+    {
+      this.filtrarCursodtInicial(this.dtInicialFiltro);
+    }
+    else if (this.dtInicialFiltro && this.dtFinalFiltro)
+    {
+      this.filtrarCursodtFinal(this.dtFinalFiltro);
+    }
+    else 
+    {
+      this.filtrarCursodtInicialFinal(this.dtInicialFiltro, this.dtFinalFiltro)
     }
   }
 
-  filtrarCursoDataInicial(dataInicial: any) : any
+  filtrarCursodtInicial(dtInicial: any) : any
   {
     this.cursosFiltrados = this.cursos.filter(resultado =>{
-      return resultado.dtInicial >= dataInicial || resultado.dtFinal >= dataInicial
-    })
+      return resultado.dtInicial >= dtInicial || resultado.dtFinal >= dtInicial
+    });
   }
 
-  filtrarCursoDataFinal(dataFinal: any) : any
+  filtrarCursodtFinal(dtFinal: any) : any
   {
     this.cursosFiltrados = this.cursos.filter(resultado =>{
-      return resultado.dtInicial <= dataFinal || resultado.dtFinal <= dataFinal
-    })
+      return resultado.dtInicial <= dtFinal || resultado.dtFinal <= dtFinal
+    });
   }
 
-  filtrarCursoDataInicialFinal(dataInicial:any, dataFinal: any) : any
+  filtrarCursodtInicialFinal(dtInicial:any, dtFinal: any) : any
   {
     this.cursosFiltrados = this.cursos.filter(resultado =>{
-      return (resultado.dtInicial >= dataInicial || resultado.dtFinal >= dataInicial) && (resultado.dtInicial <= dataFinal || resultado.dtFinal <= dataFinal)
-    })
+      return (resultado.dtInicial >= dtInicial || resultado.dtFinal >= dtInicial) && (resultado.dtInicial <= dtFinal || resultado.dtFinal <= dtFinal)
+    });
   }
 
   LimparFiltro(){
