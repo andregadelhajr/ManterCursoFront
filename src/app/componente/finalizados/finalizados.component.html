@@ -1,0 +1,39 @@
+<div class="container">
+    <br>
+
+    <h4>Cursos Finalizados</h4>
+  
+    <div class="bs-component">
+      <table class="table table-striped table-hover table-sm " >
+        <thead>
+          <tr class="table-light">
+            <th scope="col">#</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Data de Início</th>
+            <th scope="col">Data de Término</th>
+            <th scope="col">Quantidade de Alunos</th>
+            <th scope="col">Ativo</th>
+            <th scope="col">Categoria</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="cursos && cursos.length">
+          <tr class="table-active" *ngFor="let curso of cursos; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ curso.descricao }}</td>
+            <td>{{ curso.dtInicial | date }}</td>
+            <td>{{ curso.dtFinal | date }}</td>
+            <td>{{ curso.qtdAlunos }}</td>
+            <td>{{ curso.status }}</td>
+            <td>{{ curso.categoriaId }}</td>
+          </tr>
+        </tbody>
+        <tfoot *ngIf="!cursos.length">
+          <tr>
+              <td colspan="8" class="text-center text-danger">
+                  <h4>Sem registros</h4>
+              </td>
+          </tr>
+      </tfoot>
+      </table>
+    </div>
+  </div>

@@ -29,44 +29,46 @@
 
   <hr>
 
-  <table class="table table-striped table-hover table-sm " >
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Descrição</th>
-        <th scope="col">Data de Início</th>
-        <th scope="col">Data de Término</th>
-        <th scope="col">Quantidade de Alunos</th>
-        <th scope="col">Ativo</th>
-        <th scope="col">Categoria</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="cursos && cursos.length">
-      <tr *ngFor="let curso of cursosFiltrados; let i = index">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>{{ curso.descricao }}</td>
-        <td>{{ curso.dtInicial | date }}</td>
-        <td>{{ curso.dtFinal | date }}</td>
-        <td>{{ curso.qtdAlunos }}</td>
-        <td>{{ curso.status }}</td>
-        <td>{{ curso.categoriaId }}</td>
-        <td>
-          <button type="button" class="bt btn-sm" (click)="ExibirFormularioAtualizacao(curso.cursoId)">Atualizar</button> |
-          <button type="button" class="bt btn-sm" (click)="ExibirTituloExclusao(curso.cursoId)" 
-              (click)="ExibirDadosExclusao(curso.cursoId)" 
-              (click)="PegarIdExclusao(curso.cursoId)" data-bs-toggle="modal" 
-              data-bs-target="#modalExclusao">Finalizar</button>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot *ngIf="!cursos.length">
-      <tr>
-          <td colspan="8" class="text-center text-danger">
-              <h4>Sem registros</h4>
+  <div class="bs-component">
+    <table class="table table-striped table-hover table-sm " >
+      <thead>
+        <tr class="table-light">
+          <th scope="col">#</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">Data de Início</th>
+          <th scope="col">Data de Término</th>
+          <th scope="col">Quantidade de Alunos</th>
+          <th scope="col">Ativo</th>
+          <th scope="col">Categoria</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="cursos && cursos.length">
+        <tr class="table-active" *ngFor="let curso of cursosFiltrados; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ curso.descricao }}</td>
+          <td>{{ curso.dtInicial | date }}</td>
+          <td>{{ curso.dtFinal | date }}</td>
+          <td>{{ curso.qtdAlunos }}</td>
+          <td>{{ curso.status }}</td>
+          <td>{{ curso.categoriaId }}</td>
+          <td>
+            <button type="button" class="bt btn-sm" (click)="ExibirFormularioAtualizacao(curso.cursoId)">Atualizar</button> |
+            <button type="button" class="bt btn-sm" (click)="ExibirTituloExclusao(curso.cursoId)" 
+                (click)="ExibirDadosExclusao(curso.cursoId)" 
+                (click)="PegarIdExclusao(curso.cursoId)" data-bs-toggle="modal" 
+                data-bs-target="#modalExclusao">Finalizar</button>
           </td>
-      </tr>
-  </tfoot>
-  </table>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="!cursos.length">
+        <tr>
+            <td colspan="8" class="text-center text-danger">
+                <h4>Sem registros</h4>
+            </td>
+        </tr>
+    </tfoot>
+    </table>
+  </div>
 </div>
 
 
@@ -95,7 +97,7 @@
           <div class="row mb-3">
             <div class="col-6">
               <label class="form-label">Data de Início</label>
-              <input type="date" class="form-control form-control-sm" formControlName="dtInicial" placeholder="--/--/--" required>
+              <input type="datetime-local" class="form-control form-control-sm" formControlName="dtInicial" placeholder="--/--/--" required>
               
               <div *ngIf=" cursoForm.controls['dtInicial'].invalid && cursoForm.controls['dtInicial'].touched">
                 <span class="alert" style="color: red; font-size: small;">Data Inicial é Obrigatória</span>
@@ -103,7 +105,7 @@
             </div>
             <div class="col-6">
               <label class="form-label">Data de Término</label>
-              <input type="date" class="form-control" formControlName="dtFinal" placeholder="--/--/--" required>
+              <input type="datetime-local" class="form-control" formControlName="dtFinal" placeholder="--/--/--" required>
 
               <div *ngIf=" cursoForm.controls['dtFinal'].invalid && cursoForm.controls['dtFinal'].touched">
                 <span class="alert" style="color: red; font-size: small;">Data Final é Obrigatória</span>

@@ -1,4 +1,4 @@
-import { CursoService } from './curso.service';
+import { CursoService } from './Service/curso.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -12,12 +12,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { CategoriaComponent } from './componente/categoria/categoria.component';
+import { LogComponent } from './componente/log/log.component';
+import { NavBarComponent } from './componente/nav-bar/nav-bar.component';
+import { FooterComponent } from './componente/footer/footer.component';
+import { FinalizadosComponent } from './componente/finalizados/finalizados.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CursoComponent,
-    HomeComponent
+    HomeComponent,
+    CategoriaComponent,
+    LogComponent,
+    NavBarComponent,
+    FooterComponent,
+    FinalizadosComponent
   ],
   imports: [
     BrowserModule,

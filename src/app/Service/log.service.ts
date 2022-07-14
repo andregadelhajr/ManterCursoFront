@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { observable, Observable } from 'rxjs';
-import { Categoria } from './Categoria';
+import { Log } from 'src/app/Models/Log';
 
 
 const httpOptions = {
@@ -13,14 +13,14 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriaService {
-  
-  url = 'https://localhost:5001/api/Categorias';
+export class LogService {
+
+  url = 'https://localhost:5001/api/Logs';
 
   constructor(private http: HttpClient) { }
 
-  ListarCategorias(): Observable<Categoria[]>
+  ListarLogs(): Observable<Log[]>
   {
-    return this.http.get<Categoria[]>(this.url, httpOptions)
+    return this.http.get<Log[]>(this.url, httpOptions)
   }
 }

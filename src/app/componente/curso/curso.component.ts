@@ -1,10 +1,10 @@
-import { CursoService } from 'src/app/curso.service';
+import { CursoService } from 'src/app/Service/curso.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Curso } from 'src/app/Curso';
+import { Curso } from 'src/app/Models/Curso';
 import { ToastrService } from 'ngx-toastr';
-import { Categoria } from 'src/app/Categoria';
-import { CategoriaService } from 'src/app/categoria.service';
+import { Categoria } from 'src/app/Models/Categoria';
+import { CategoriaService } from 'src/app/Service/categoria.service';
 
 @Component({
   selector: 'app-curso',
@@ -30,6 +30,7 @@ export class CursoComponent implements OnInit {
   cursos : Curso[];
   categorias : Categoria[];
   cursosFiltrados: Curso[];
+  errors: string[];
   cursoId : number;
   excluirId: number;
   dtInicialFiltro: any;
@@ -61,7 +62,7 @@ export class CursoComponent implements OnInit {
 
   ListarCursos(): void 
   {
-    this.cursoService.PegarTodos().subscribe((resultado) => 
+    this.cursoService.PegarTodosCursosAtivos().subscribe((resultado) => 
     {
       this.cursos = resultado;
       this.cursosFiltrados = this.cursos;
@@ -123,17 +124,18 @@ export class CursoComponent implements OnInit {
           this.visibilidadeFormulario=false;
           this.visibilidadeTabela=true;
           // alert('Curso Atualizado com sucesso');
-          this.toastr.success('Atualizado!', 'Atualizado com Sucesso!');
+          this.toastr.warning('Atualizado!', 'Atualizado com Sucesso!');
           this.cursoService.PegarTodos().subscribe((registros) => {
             this.ListarCursos();
             this.cursos = registros;
           });
         }, error => {
-          this.toastr.error(error.message);
-          console.log(error);
+          console.log(error.error.errors);
+          this.errors = error.errors;
+          this.toastr.error(error.error.errors, 'Error');
         });
       }
-      else {
+      else { 
   
         this.cursoService.SalvarCurso(curso).subscribe((resultado) =>{
           this.visibilidadeTabela=true;
@@ -145,8 +147,9 @@ export class CursoComponent implements OnInit {
             this.ListarCursos();
           })
         }, error => {
-          this.toastr.error(error.message);
-          console.log(error);
+          console.log(error.error.errors);
+          this.errors = error.errors;
+          this.toastr.error(error.error.errors, 'Error');
         });
   
       }

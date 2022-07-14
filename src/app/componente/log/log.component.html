@@ -1,0 +1,34 @@
+<div class="container" >
+    <br>
+    <h4>Logs</h4>
+  
+    <table class="table table-striped table-hover table-sm " >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Data de Inclusão</th>
+            <th scope="col">Data de Atualização</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Curso</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="logs && logs.length">
+          <tr *ngFor="let log of logs; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ log.dtInclusao | date }}</td>
+            <td>{{ log.dtAtualizacao | date }}</td>
+            <td>{{ log.usuario }}</td>
+            <td>{{ log.cursoId }}</td>
+            <td>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="!logs.length">
+        <tr>
+            <td colspan="8" class="text-center text-danger">
+                <h4>Sem registros</h4>
+            </td>
+        </tr>
+    </tfoot>
+    </table>
+  </div>
