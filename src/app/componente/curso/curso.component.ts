@@ -60,6 +60,8 @@ export class CursoComponent implements OnInit {
     })
   }
 
+  //Listagem
+
   ListarCursos(): void 
   {
     this.cursoService.PegarTodosCursosAtivos().subscribe((resultado) => 
@@ -74,6 +76,8 @@ export class CursoComponent implements OnInit {
       this.categorias = resultado;
     });
   }
+
+  //Cadastro e atualização dos cursos
 
   ExibirFormularioCadastro(): void{
     this.visibilidadeTabela=false;
@@ -159,6 +163,8 @@ export class CursoComponent implements OnInit {
 
   }
 
+  //Finalização do curso
+
   PegarIdExclusao(cursoId: number) {
     this.excluirId = cursoId;
   }
@@ -202,15 +208,15 @@ export class CursoComponent implements OnInit {
 
   //Filtro Descriçao
 
-  public get filtroLista(){
-    return this._filtroLista;
-  }
-
   filtrarCursos(filtrar: string): any{
     filtrar = filtrar.toLocaleLowerCase();
     return this.cursos.filter(
       (curso: {descricao:string}) => curso.descricao.toLocaleLowerCase().indexOf(filtrar)!== -1
     );
+  }
+
+  public get filtroLista(){
+    return this._filtroLista;
   }
 
   public set filtroLista(value: string){

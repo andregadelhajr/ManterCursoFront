@@ -9,13 +9,14 @@ import { FooterComponent } from './componente/footer/footer.component';
 import { FinalizadosComponent } from './componente/finalizados/finalizados.component';
 
 const routes: Routes = [
-  {path: 'home', component:HomeComponent},
+  {path: 'Home', component:HomeComponent},
   {path: 'curso', component:CursoComponent},
   {path: 'categoria', component:CategoriaComponent},
   {path: 'log', component:LogComponent},
   {path: 'nav-bar', component:NavBarComponent},
   {path: 'footer', component:FooterComponent},
-  {path: 'finalizado', component:FinalizadosComponent}
+  {path: 'finalizado', component:FinalizadosComponent},
+  {path: '', redirectTo: 'Home', pathMatch: 'full' }
 ];
 
 @NgModule({

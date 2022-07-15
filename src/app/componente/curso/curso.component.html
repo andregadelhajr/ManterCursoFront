@@ -50,7 +50,7 @@
           <td>{{ curso.dtFinal | date }}</td>
           <td>{{ curso.qtdAlunos }}</td>
           <td>{{ curso.status }}</td>
-          <td>{{ curso.categoriaId }}</td>
+          <td>{{ curso.categoria.nome }}</td>
           <td>
             <button type="button" class="bt btn-sm" (click)="ExibirFormularioAtualizacao(curso.cursoId)">Atualizar</button> |
             <button type="button" class="bt btn-sm" (click)="ExibirTituloExclusao(curso.cursoId)" 

@@ -1,0 +1,36 @@
+footer
+{
+	grid-area: footer;
+	border-radius: var(--main-radius);
+	padding-top: var(--main-padding);
+	padding-top: 20px;
+	padding-left: 20px;
+}
+
+footer p{
+	text-align: center;
+	color:#FFF;
+}
+
+footer p{
+	color:#FFF;
+}
+
+
+footer a:link{
+	text-decoration: none;
+	font: 1.06rem 'Roboto';
+	color: #FFF;
+}
+
+footer a:visited{
+	color: #FFF;
+}
+
+footer a:hover{
+	color:#000;
+}
+
+footer a:active{
+	color:#000;
+}
